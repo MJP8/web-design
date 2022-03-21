@@ -1,0 +1,82 @@
+body footer, body header nav ul li a, body header {
+  background: #343028;
+  color: #cbcfd7;
+}
+
+body {
+  background-color: #282c34;
+  color: #d7d3cb;
+}
+
+body {
+  font-family: "Andale Mono", Courier, monospace;
+  top: 0px;
+  margin: 0px;
+}
+body header {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+}
+body header nav ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0px;
+}
+body header nav ul li {
+  flex-grow: 0.5;
+}
+body header nav ul li a {
+  text-decoration: none;
+}
+body header nav ul li#logo {
+  flex-grow: 1;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+body main {
+  padding-top: 80px;
+}
+body main section,
+body main article {
+  padding: 20px;
+}
+body main section h1,
+body main article h1 {
+  font-size: 2.2em;
+  padding-left: 1em;
+}
+body footer {
+  height: 200px;
+}
+body footer h1 {
+  font-size: 3rem;
+  float: left;
+  padding-top: 1.5rem;
+  padding-left: 1rem;
+}
+body footer > ul {
+  list-style-type: none;
+  display: flex;
+  position: absolute;
+  padding: 0px;
+  height: 150px;
+  width: 30vw;
+  left: 60vw;
+}
+body footer > ul li {
+  flex-grow: 0.8;
+}
+body footer > ul li ul {
+  display: flex;
+  flex-flow: column wrap;
+  list-style-type: none;
+  justify-content: center;
+}
+body footer > ul li ul li {
+  flex-grow: 0;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,94 @@
+$bcolor: #282c34;
+$hcolor: complement(#282c34);
+$color1: invert($bcolor);
+$color2: invert($hcolor);
+$text-family: "Andale Mono",
+Courier,
+monospace;
+%header {
+    background: $hcolor;
+    color: $color2;
+}
+
+%body {
+    background-color: $bcolor;
+    color: $color1;
+}
+
+body {
+    @extend %body;
+    font-family: $text-family;
+    top: 0px;
+    margin: 0px;
+    header {
+        @extend %header;
+        position: absolute;
+        width: 100%;
+        height: 70px;
+        nav {
+            ul {
+                list-style-type: none;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                padding: 0px;
+                li {
+                    flex-grow: 0.5;
+                    a {
+                        @extend %header;
+                        text-decoration: none;
+                    }
+                }
+                li#logo {
+                    flex-grow: 1;
+                    font: {
+                        size: 2.2rem;
+                        weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    main {
+        padding-top: 80px;
+        section,
+        article {
+            padding: 20px;
+            h1 {
+                font-size: 2.2em;
+                padding-left: 1em;
+            }
+        }
+    }
+    footer {
+        @extend %header;
+        height: 200px;
+        h1 {
+            font-size: 3rem;
+            float: left;
+            padding-top: 1.5rem;
+            padding-left: 1rem;
+        }
+    }
+    footer>ul {
+        list-style-type: none;
+        display: flex;
+        position: absolute;
+        padding: 0px;
+        height: 150px;
+        width: 30vw;
+        left: 100vw - 40;
+        li {
+            flex-grow: 0.8;
+            ul {
+                display: flex;
+                flex-flow: column wrap;
+                list-style-type: none;
+                justify-content: center;
+                li {
+                    flex-grow: 0;
+                }
+            }
+        }
+    }
+}
