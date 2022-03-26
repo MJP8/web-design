@@ -38,6 +38,15 @@ app.get('/js/json/dynamic.json', function(req, res) {
         if (err) throw err;
     });
 });
+app.get('/js/jquery.js', function(req, res) {
+    const file = 'src/js/jquery.js';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'application/js' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);
 });

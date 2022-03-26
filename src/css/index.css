@@ -31,7 +31,7 @@ body header nav ul li {
 body header nav ul li a {
   text-decoration: none;
 }
-body header nav ul li#logo {
+body header nav ul li.logo {
   flex-grow: 1;
   font-size: 2.2rem;
   font-weight: bold;

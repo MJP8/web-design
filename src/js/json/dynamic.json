@@ -14,17 +14,21 @@
                 "Laptop",
                 "Mobile",
                 "Responsive (New!)"
-            ],
-            "About us", [
-                "About",
-                "Coders",
-                "Innovations"
-            ],
+            ]
+        ],
+        [
             "Customer Service", [
                 "Contact us",
                 "Error fixing",
                 "SEO help",
                 "Be a developer"
+            ]
+        ],
+        [
+            "About us", [
+                "About",
+                "Coders",
+                "Innovations"
             ]
         ]
     ]
