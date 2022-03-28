@@ -12,6 +12,8 @@ function analyze(jsonText) {
         // problem?:
         try {
             for (const item of json.footer) {
+                console.log(item[1]); // good!
+                console.log(json.footer.indexOf(item)); // good!
                 $('footer ul').append(`<li id="li${json.footer.indexOf(item)}">
                 <h5>${item[0]}</h5><ul></ul></li>`);
                 for (const i of item[1]) {
