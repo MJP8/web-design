@@ -31,7 +31,7 @@ body header nav ul li {
 body header nav ul li a {
   text-decoration: none;
 }
-body header nav ul li#logo {
+body header nav ul li.logo {
   flex-grow: 1;
   font-size: 2.2rem;
   font-weight: bold;
@@ -50,30 +50,31 @@ body main article h1 {
 }
 body footer {
   height: 200px;
+  display: flex;
 }
 body footer h1 {
   font-size: 3rem;
-  float: left;
   padding-top: 1.5rem;
-  padding-left: 1rem;
+  padding-left: 2rem;
+  flex-grow: 1.5;
 }
 body footer > ul {
   list-style-type: none;
   display: flex;
-  position: absolute;
   padding: 0px;
   height: 150px;
-  width: 30vw;
-  left: 60vw;
+  flex-grow: 1;
 }
 body footer > ul li {
   flex-grow: 0.8;
+  text-align: center;
 }
 body footer > ul li ul {
+  font-size: small;
   display: flex;
   flex-flow: column wrap;
   list-style-type: none;
-  justify-content: center;
+  justify-content: center !important;
 }
 body footer > ul li ul li {
   flex-grow: 0;

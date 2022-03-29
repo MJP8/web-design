@@ -1,0 +1,35 @@
+{
+    "message": "Hello example JSON",
+    "nav": [
+        { "name": "Spider Web Design", "href": "/", "class": "logo" },
+        { "name": "Build a Site", "href": "/", "class": "nav" },
+        { "name": "About us", "href": "/", "class": "nav" },
+        { "name": "Sign in", "href": "/", "class": "nav" },
+        { "name": "Sign up", "href": "/", "class": "nav" }
+    ],
+    "footer": [
+        [
+            "Build a Site", [
+                "Desktop",
+                "Laptop",
+                "Mobile",
+                "Responsive (New!)"
+            ]
+        ],
+        [
+            "Customer Service", [
+                "Contact us",
+                "Error fixing",
+                "SEO help",
+                "Be a developer"
+            ]
+        ],
+        [
+            "About us", [
+                "About",
+                "Coders",
+                "Innovations"
+            ]
+        ]
+    ]
+}
