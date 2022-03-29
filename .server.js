@@ -47,6 +47,15 @@ app.get('/js/jquery.js', function(req, res) {
         if (err) throw err;
     });
 });
+app.get('/favicon.ico', function(req, res) {
+    const file = 'src/img/favicon.png';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'image/png' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);
 });
