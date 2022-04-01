@@ -3,7 +3,7 @@ const app = express();
 const port = 4000;
 const fs = require('fs');
 app.get('/', function(req, res) {
-    const file = 'src/index.html';
+    const file = 'src/html/index.html';
     fs.readFile(file, function(err, data) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
@@ -51,6 +51,15 @@ app.get('/favicon.ico', function(req, res) {
     const file = 'src/img/favicon.png';
     fs.readFile(file, function(err, data) {
         res.writeHead(200, { 'Content-Type': 'image/png' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
+app.get('/new_site/', function(req, res) {
+    const file = 'src/html/new_site.html';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         res.end();
         if (err) throw err;
