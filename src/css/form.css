@@ -1,0 +1,49 @@
+form {
+  margin: 5px 10px;
+}
+form fieldset {
+  border: 0px;
+  margin: 5px 0px;
+}
+form fieldset legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+}
+form fieldset ol {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+}
+form fieldset ol label {
+  flex: 0 1 50px;
+  margin-right: 10px;
+}
+form fieldset ol li {
+  flex: 1;
+  display: flex;
+  margin: 5px;
+  align-items: center;
+}
+form fieldset input,
+form fieldset button,
+form fieldset textarea {
+  flex: 3;
+  padding: 10px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  background-color: #343028;
+  color: #cbcfd7;
+  border: 0px;
+}
+form fieldset button:hover,
+form fieldset input:focus,
+form fieldset textarea:focus {
+  background-color: #37332a;
+}
+form fieldset input[id]::placeholder {
+  font-family: "Andale Mono", Courier, monospace;
+}
+
+/*# sourceMappingURL=form.css.map */

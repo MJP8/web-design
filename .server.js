@@ -65,6 +65,15 @@ app.get('/new_site/', function(req, res) {
         if (err) throw err;
     });
 });
+app.get('/css/form.css', function(req, res) {
+    const file = 'src/css/form.css';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/css' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);
 });

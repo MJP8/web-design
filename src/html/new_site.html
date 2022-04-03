@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build a site</title>
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/form.css">
 </head>
 
 <body>
@@ -15,7 +16,26 @@
             <ul></ul>
         </nav>
     </header>
-    <main></main>
+    <main>
+        <form action="/" method="get">
+            <fieldset>
+                <legend>Metadata</legend>
+                <hr>
+                <ol>
+                    <li>
+                        <label for="title" title="Required">Title*:</label>
+                        <input type="text" id="title" name="title" placeholder="The title displayed at the top of the browser" />
+                    </li>
+                    <li>
+                        <label for="meta-d">Description:</label>
+                        <textarea name="meta-d" id="meta-d" cols="20" rows="5" placeholder="20 words or less">Made by Spider Web Design</textarea>
+                    </li>
+                </ol>
+                <hr>
+                <button type="submit">Submit</button>
+            </fieldset>
+        </form>
+    </main>
     <footer>
         <h1>Spider Web Design</h1>
         <ul></ul>
