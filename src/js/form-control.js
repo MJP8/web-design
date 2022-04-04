@@ -29,4 +29,12 @@ if (true) { // will add checking code
 			<td>${formData['meta-d']}</td>
 		</tr>`
     );
+    $('button').click(function(e) {
+        if (confirm('Are you sure you want to approve the form data?')) {
+            $('main section>section').hide();
+            $('main section').append('<b>Approved</b><a href="/">Go to home</a>');
+        } else {
+            location.assign('/new_site/');
+        }
+    });
 }
