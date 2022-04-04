@@ -7,7 +7,7 @@ function parseQuery(queryString) {
     }
     return parsedQueries;
 }
-const queries = parseQuery(location.search);
+const queries = parseQuery(decodeURI(location.pathname.concat(location.search)).split('?')[1]);
 console.log(queries.toString());
 let formData = {};
 for (const query in queries) {
