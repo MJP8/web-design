@@ -36,6 +36,7 @@ form fieldset textarea {
   background-color: #343028;
   color: #cbcfd7;
   border: 0px;
+  font-family: inherit;
 }
 form fieldset button:hover,
 form fieldset input:focus,

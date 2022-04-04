@@ -74,6 +74,24 @@ app.get('/css/form.css', function(req, res) {
         if (err) throw err;
     });
 });
+app.get('/new_site/finished/', function(req, res) {
+    const file = 'src/html/form-control.html';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
+app.get('/js/form-control.js', function(req, res) {
+    const file = 'src/js/form-control.js';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'application/javascript' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);
 });
