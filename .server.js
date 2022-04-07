@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 4000;
 const fs = require('fs');
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 app.get('/', function(req, res) {
     const file = 'src/html/index.html';
     fs.readFile(file, function(err, data) {
@@ -91,6 +93,18 @@ app.get('/js/form-control.js', function(req, res) {
         res.end();
         if (err) throw err;
     });
+});
+app.post('/data/', function(req, res) {
+    let data = req.body;
+    console.log(data);
+    for (const item in data) {
+        if (Object.hasOwnProperty.call(data, item)) {
+            const element = data[item];
+            console.log(element);
+        }
+    }
+    res.writeHead(200);
+    res.end('');
 });
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);

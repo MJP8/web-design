@@ -33,6 +33,12 @@ if (true) { // will add checking code
         if (confirm('Are you sure you want to approve the form data?')) {
             $('main section>section').hide();
             $('main section').append('<b>Approved</b><a href="/">Go to home</a>');
+            $.ajax({
+                url: '/data/',
+                method: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json; charset=UTF-8'
+            });
         } else {
             location.assign('/new_site/');
         }
