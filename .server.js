@@ -12,6 +12,7 @@ app.get('/', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /');
 });
 app.get('/css/index.css', function(req, res) {
     const file = 'src/css/index.css';
@@ -21,6 +22,7 @@ app.get('/css/index.css', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /css/index.css');
 });
 app.get('/js/index.js', function(req, res) {
     const file = 'src/js/index.js';
@@ -30,6 +32,7 @@ app.get('/js/index.js', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /js/index.js');
 });
 app.get('/js/json/dynamic.json', function(req, res) {
     const file = 'src/js/json/dynamic.json';
@@ -39,6 +42,7 @@ app.get('/js/json/dynamic.json', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /js/json/dynamic.json');
 });
 app.get('/js/jquery.js', function(req, res) {
     const file = 'src/js/jquery.js';
@@ -48,6 +52,7 @@ app.get('/js/jquery.js', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /js/jquery.js');
 });
 app.get('/favicon.ico', function(req, res) {
     const file = 'src/img/favicon.png';
@@ -57,6 +62,7 @@ app.get('/favicon.ico', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /favicon.ico');
 });
 app.get('/new_site/', function(req, res) {
     const file = 'src/html/new_site.html';
@@ -66,6 +72,7 @@ app.get('/new_site/', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /new-site/');
 });
 app.get('/css/form.css', function(req, res) {
     const file = 'src/css/form.css';
@@ -75,6 +82,7 @@ app.get('/css/form.css', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /css/form.css');
 });
 app.get('/new_site/finished/', function(req, res) {
     const file = 'src/html/form-control.html';
@@ -84,6 +92,7 @@ app.get('/new_site/finished/', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /new_site/finished/');
 });
 app.get('/js/form-control.js', function(req, res) {
     const file = 'src/js/form-control.js';
@@ -93,18 +102,13 @@ app.get('/js/form-control.js', function(req, res) {
         res.end();
         if (err) throw err;
     });
+    console.log('200 GET /js/form-control.js');
 });
 app.post('/data/', function(req, res) {
     let data = req.body;
-    console.log(data);
-    for (const item in data) {
-        if (Object.hasOwnProperty.call(data, item)) {
-            const element = data[item];
-            console.log(element);
-        }
-    }
-    res.writeHead(200);
-    res.end('');
+    console.log('200 POST /data/');
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(data));
 });
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);

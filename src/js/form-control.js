@@ -18,16 +18,24 @@ for (const query in queries) {
     }
 }
 if (true) { // will add checking code
-    $('main h1>span').append(formData['title']);
+    $('main h1>span').append(formData['meta-t']);
     $('main table>tbody').append(
         `<tr>
 			<th>Title:</th>
-			<td>${formData['title']}</td>
+			<td>${formData['meta-t']}</td>
 		</tr>
 		<tr>
 			<th>Description:</th>
 			<td>${formData['meta-d']}</td>
-		</tr>`
+		</tr>
+        <tr>
+            <th>Keywords:</th>
+            <td>${formData['meta-k']}</td>
+        </tr>
+        <tr>
+            <th>Author:</th>
+            <td>${formData['meta-a']}</td>
+        </tr>`
     );
     $('button').click(function(e) {
         if (confirm('Are you sure you want to approve the form data?')) {

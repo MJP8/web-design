@@ -17,23 +17,31 @@
         </nav>
     </header>
     <main>
-        <form action="/new_site/finished/" method="get">
+        <form action="/new_site/finished/" method="get" novalidate>
             <fieldset>
                 <legend>Metadata</legend>
                 <hr>
                 <ol>
                     <li>
-                        <label for="title" title="Required">Title*:</label>
-                        <input type="text" id="title" name="title" placeholder="The title displayed at the top of the browser" />
+                        <label for="meta-t" title="Required">Title*:</label>
+                        <input type="text" id="meta-t" name="meta-t" placeholder="The title displayed at the top of the browser" required />
                     </li>
                     <li>
                         <label for="meta-d">Description:</label>
-                        <textarea name="meta-d" id="meta-d" cols="20" rows="5" placeholder="20 words or less">Made by Spider Web Design</textarea>
+                        <textarea name="meta-d" id="meta-d" cols="20" rows="5" placeholder="20 words or less" required>Made by Spider Web Design</textarea>
+                    </li>
+                    <li>
+                        <label for="meta-k">Keywords:</label>
+                        <textarea name="meta-k" id="meta-k" cols="20" rows="3" placeholder="Separate with a ' '" required></textarea>
+                    </li>
+                    <li>
+                        <label for="meta-a">Author:</label>
+                        <input type="text" name="meta-a" id="meta-a" placeholder="The author of the site" />
                     </li>
                 </ol>
                 <hr>
-                <button type="submit">Submit</button>
             </fieldset>
+            <button type="submit">Submit</button>
         </form>
     </main>
     <footer>
@@ -42,6 +50,91 @@
     </footer>
     <script src="/js/jquery.js"></script>
     <script src="/js/index.js"></script>
+    <script>
+        function setErrorMessage(el, message) {
+            $(el).data('errorMessage', message);
+        }
+
+        function validateKeywords() {
+            let keywords = document.getElementById('meta-k');
+            let pattern = /(\S+ )+\S+/;
+            let valid = pattern.test(keywords.value);
+            if (!valid) {
+                setErrorMessage(keywords, 'Please separate with spaces');
+            }
+            return valid;
+        }
+
+        function showErrorMessage(el) {
+            let $el = $(el);
+            let $errorContainer = $el.siblings('.error');
+            if (!$errorContainer.length) {
+                $errorContainer = $('<span class="error"></span>').insertAfter($el);
+            }
+            $errorContainer.text($(el).data('errorMessage'));
+        }
+
+        function isEmpty(el) {
+            return !el.value || el.value == el.placeholder;
+        }
+
+        function isRequired(el) {
+            return ((typeof el.required === 'boolean') && el.required);
+        }
+
+        function validateRequired(el) {
+            if (isRequired(el)) {
+                let valid = !isEmpty(el);
+                if (!valid) {
+                    setErrorMessage(el, 'Field is required')
+                }
+                return valid;
+            }
+            return true;
+        }
+
+        function removeErrorMessage(el) {
+            let $el = $(el);
+            $el.removeAttr('errorMessage');
+            $el.siblings('.error').remove();
+        }
+        (function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+                let elements = this.elements;
+                let valid = {};
+                let isValid;
+                let isFormValid;
+                for (let i = 0, l = (elements.length - 1); i < l; i++) {
+                    isValid = validateRequired(elements[i]);
+                    if (!isValid) {
+                        showErrorMessage(elements[i]);
+                    } else {
+                        removeErrorMessage(elements[i]);
+                    }
+                    valid[elements[i].id] = isValid;
+                }
+                if ($('#meta-k').val() !== '') {
+                    if (!validateKeywords()) {
+                        showErrorMessage(document.getElementById('meta-k'));
+                        valid['meta-k'] = false;
+                    } else {
+                        removeErrorMessage();
+                    }
+                }
+                for (const field in valid) {
+                    if (!valid[field]) {
+                        isFormValid = false;
+                        break;
+                    }
+                    isFormValid = true;
+                }
+                if (isFormValid) {
+                    this.submit();
+                }
+            });
+        }());
+    </script>
 </body>
 
 </html>
