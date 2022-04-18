@@ -32,7 +32,8 @@ form {
             }
         }
         input,
-        textarea {
+        textarea,
+        select {
             flex: 3;
             padding: 10px;
             border-radius: 7px;
@@ -53,7 +54,8 @@ form {
             color: red;
         }
         input:focus,
-        textarea:focus {
+        textarea:focus,
+        select:focus {
             background-color: $hover;
         }
         input[id]::placeholder {

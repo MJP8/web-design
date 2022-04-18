@@ -27,7 +27,8 @@ form fieldset ol li {
   align-items: center;
 }
 form fieldset input,
-form fieldset textarea {
+form fieldset textarea,
+form fieldset select {
   flex: 3;
   padding: 10px;
   border-radius: 7px;
@@ -48,7 +49,8 @@ form fieldset span.error::before {
   color: red;
 }
 form fieldset input:focus,
-form fieldset textarea:focus {
+form fieldset textarea:focus,
+form fieldset select:focus {
   background-color: #37332a;
 }
 form fieldset input[id]::placeholder {

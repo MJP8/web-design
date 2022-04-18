@@ -23,7 +23,7 @@
                 <hr>
                 <ol>
                     <li>
-                        <label for="meta-t" title="Required">Title*:</label>
+                        <label for="meta-t">Title:</label>
                         <input type="text" id="meta-t" name="meta-t" placeholder="The title displayed at the top of the browser" required />
                     </li>
                     <li>
@@ -32,15 +32,39 @@
                     </li>
                     <li>
                         <label for="meta-k">Keywords:</label>
-                        <textarea name="meta-k" id="meta-k" cols="20" rows="3" placeholder="Separate with a ' '" required></textarea>
+                        <textarea name="meta-k" id="meta-k" cols="20" rows="3" placeholder="Separate with a ','" required></textarea>
                     </li>
                     <li>
                         <label for="meta-a">Author:</label>
                         <input type="text" name="meta-a" id="meta-a" placeholder="The author of the site" />
                     </li>
                 </ol>
-                <hr>
             </fieldset>
+            <fieldset>
+                <legend>Layout</legend>
+                <hr>
+                <ol>
+                    <li>
+                        <label for="layout-o">Overall layout:</label>
+                        <select name="layout-o" id="layout-o">
+                            <option disabled selected>Layout</option>
+                            <optgroup label="Desktops / Laptops">
+                                <option>Default</option>
+                                <option>Sidebar and Navigation</option>
+                                <option>Sidebar</option>
+                            </optgroup>
+                            <optgroup label="Mobile">
+                                <option>Mobile Default</option>
+                            </optgroup>
+                            <optgroup label="Responsive">
+                                <option>Responsive Default</option>
+                                <option>Responsive Sidebar</option>
+                            </optgroup>
+                        </select>
+                    </li>
+                </ol>
+            </fieldset>
+            <hr>
             <button type="submit">Submit</button>
         </form>
     </main>
@@ -57,10 +81,10 @@
 
         function validateKeywords() {
             let keywords = document.getElementById('meta-k');
-            let pattern = /(\S+ )+\S+/;
+            let pattern = /(\S+(,|, +|,\s+))+\S+/;
             let valid = pattern.test(keywords.value);
             if (!valid) {
-                setErrorMessage(keywords, 'Please separate with spaces');
+                setErrorMessage(keywords, 'Please separate with commas');
             }
             return valid;
         }
@@ -98,6 +122,15 @@
             $el.removeAttr('errorMessage');
             $el.siblings('.error').remove();
         }
+
+        function validateLayout() {
+            let el = document.getElementById('layout-o');
+            let valid = !(el.value === 'Layout');
+            if (!valid) {
+                setErrorMessage(el, '\'Layout\' is not a layout');
+            }
+            return valid;
+        }
         (function() {
             $('form').on('submit', function(e) {
                 e.preventDefault();
@@ -119,8 +152,14 @@
                         showErrorMessage(document.getElementById('meta-k'));
                         valid['meta-k'] = false;
                     } else {
-                        removeErrorMessage();
+                        removeErrorMessage(document.getElementById('meta-k'));
                     }
+                }
+                if (!validateLayout()) {
+                    showErrorMessage(document.getElementById('layout-o'));
+                    valid['layout-o'] = false;
+                } else {
+                    removeErrorMessage(document.getElementById('layout-o'));
                 }
                 for (const field in valid) {
                     if (!valid[field]) {
