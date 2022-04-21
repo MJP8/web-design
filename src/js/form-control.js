@@ -6,14 +6,8 @@ function parseQuery(queries) {
     }
     return parsedQueries;
 }
-let raw = {};
-$.getJSON('/form_data/', function(data) {
-    for (const i in data) {
-        if (Object.hasOwnProperty.call(data, i)) {
-            const element = data[i];
-            raw[i] = element;
-        }
-    }
+$(function() {
+    const raw = JSON.parse($('data').attr('value'));
     const queries = parseQuery(raw);
     if (true) { // will add checking code
         $('main h1>span').append(queries['meta-t']);

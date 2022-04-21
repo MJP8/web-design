@@ -84,26 +84,17 @@ app.get('/css/form.css', function(req, res) {
         if (err) throw err;
     });
     console.log('200 GET /css/form.css');
-}); {
-    let json;
-    app.post('/new_site/finished/', function(req, res) {
-        const file = 'src/html/form-control.html';
-        fs.readFile(file, function(err, data) {
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.write(data);
-            res.end();
-            if (err) throw err;
-        });
-        json = req.body;
-        console.log(json);
-        console.log('200 GET /new_site/finished/');
-    });
-    app.get('/form_data/', function(req, res) {
-        console.log(json);
-        res.json(json);
+});
+app.post('/new_site/finished/', function(req, res) {
+    const file = 'src/html/form-control.html';
+    fs.readFile(file, function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(data.toString().replace(/<\/body>\s+<\/html>/m, `<data value='${JSON.stringify(req.body)}'></data></body></html>`));
         res.end();
+        if (err) throw err;
     });
-}
+    console.log('200 POST /new_site/finished/');
+});
 
 app.get('/js/form-control.js', function(req, res) {
     const file = 'src/js/form-control.js';
