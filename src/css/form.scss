@@ -1,0 +1,77 @@
+$bcolor: #282c34;
+$hcolor: complement(#282c34);
+$color1: invert($bcolor);
+$color2: invert($hcolor);
+$hover: lighten($color: $hcolor, $amount: 1);
+form {
+    margin: 5px 10px;
+    fieldset {
+        border: 0px;
+        margin: 5px 0px;
+        legend {
+            font: {
+                weight: bold;
+                size: 1.2em;
+            }
+            letter-spacing: 1px;
+        }
+        ol {
+            list-style: none;
+            padding: 0px;
+            display: flex;
+            flex-direction: column;
+            label {
+                flex: 0 1 50px;
+                margin-right: 10px;
+            }
+            li {
+                flex: 1;
+                display: flex;
+                margin: 5px;
+                align-items: center;
+            }
+        }
+        input,
+        textarea,
+        select {
+            flex: 3;
+            padding: 10px;
+            border-radius: 7px;
+            box-sizing: border-box;
+            background-color: $hcolor;
+            color: $color2;
+            border: 0px;
+            font-family: inherit;
+        }
+        span.error {
+            color: red;
+            font-size: smaller;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        span.error::before {
+            content: '! ';
+            color: red;
+        }
+        input:focus,
+        textarea:focus,
+        select:focus {
+            background-color: $hover;
+        }
+        input[id]::placeholder {
+            font-family: "Andale Mono", Courier, monospace;
+        }
+    }
+    button {
+        padding: 10px;
+        border-radius: 7px;
+        box-sizing: border-box;
+        background-color: $hcolor;
+        color: $color2;
+        border: 0px;
+        font-family: inherit;
+    }
+    button:hover {
+        background-color: $hover;
+    }
+}

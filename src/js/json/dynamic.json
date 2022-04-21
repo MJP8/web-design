@@ -2,7 +2,7 @@
     "message": "Hello example JSON",
     "nav": [
         { "name": "Spider Web Design", "href": "/", "class": "logo" },
-        { "name": "Build a Site", "href": "/", "class": "nav" },
+        { "name": "Build a Site", "href": "/new_site/", "class": "nav" },
         { "name": "About us", "href": "/", "class": "nav" },
         { "name": "Sign in", "href": "/", "class": "nav" },
         { "name": "Sign up", "href": "/", "class": "nav" }
