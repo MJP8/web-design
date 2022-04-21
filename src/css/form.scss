@@ -32,8 +32,8 @@ form {
             }
         }
         input,
-        button,
-        textarea {
+        textarea,
+        select {
             flex: 3;
             padding: 10px;
             border-radius: 7px;
@@ -41,14 +41,37 @@ form {
             background-color: $hcolor;
             color: $color2;
             border: 0px;
+            font-family: inherit;
         }
-        button:hover,
+        span.error {
+            color: red;
+            font-size: smaller;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        span.error::before {
+            content: '! ';
+            color: red;
+        }
         input:focus,
-        textarea:focus {
+        textarea:focus,
+        select:focus {
             background-color: $hover;
         }
         input[id]::placeholder {
             font-family: "Andale Mono", Courier, monospace;
         }
+    }
+    button {
+        padding: 10px;
+        border-radius: 7px;
+        box-sizing: border-box;
+        background-color: $hcolor;
+        color: $color2;
+        border: 0px;
+        font-family: inherit;
+    }
+    button:hover {
+        background-color: $hover;
     }
 }
