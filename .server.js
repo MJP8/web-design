@@ -4,6 +4,7 @@ const port = 4000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.get('/', function(req, res) {
     const file = 'src/html/index.html';
     fs.readFile(file, function(err, data) {
@@ -83,17 +84,27 @@ app.get('/css/form.css', function(req, res) {
         if (err) throw err;
     });
     console.log('200 GET /css/form.css');
-});
-app.get('/new_site/finished/', function(req, res) {
-    const file = 'src/html/form-control.html';
-    fs.readFile(file, function(err, data) {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(data);
-        res.end();
-        if (err) throw err;
+}); {
+    let json;
+    app.post('/new_site/finished/', function(req, res) {
+        const file = 'src/html/form-control.html';
+        fs.readFile(file, function(err, data) {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.write(data);
+            res.end();
+            if (err) throw err;
+        });
+        json = req.body;
+        console.log(json);
+        console.log('200 GET /new_site/finished/');
     });
-    console.log('200 GET /new_site/finished/');
-});
+    app.get('/form_data/', function(req, res) {
+        console.log(json);
+        res.json(json);
+        res.end();
+    });
+}
+
 app.get('/js/form-control.js', function(req, res) {
     const file = 'src/js/form-control.js';
     fs.readFile(file, function(err, data) {
