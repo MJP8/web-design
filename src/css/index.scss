@@ -54,10 +54,11 @@ body {
         section,
         article {
             padding: 20px;
-            h1 {
-                font-size: 2.2em;
-                padding-left: 1em;
-            }
+        }
+        h1 {
+            font-size: 2.2em;
+            padding-left: 1em;
+            text-decoration: underline;
         }
     }
     footer {
