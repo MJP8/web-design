@@ -25,6 +25,7 @@ get('/js/jquery.js', 'src/js/jquery.js', 'application/javascript');
 get('/favicon.ico', 'src/img/favicon.png', 'image/png');
 get('/new_site/', 'src/html/new_site.html', 'text/html');
 get('/css/form.css', 'src/css/form.css', 'text/css');
+get('/js/form_validation.js', 'src/js/form_validation.js', 'application/javascript');
 app.post('/new_site/finished/', function(req, res) {
     const file = 'src/html/form-control.html';
     fs.readFile(file, function(err, data) {

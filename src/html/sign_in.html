@@ -18,22 +18,22 @@
     </header>
     <main>
         <h1></h1>
-        <form action="/user/" method="post">
+        <form action="/user/" method="post" novalidate>
             <fieldset>
                 <legend>User Info</legend>
                 <hr>
                 <ol>
                     <li>
                         <label for="user-n">Username:</label>
-                        <input type="text" name="user-n" id="user-n" />
+                        <input type="text" name="user-n" id="user-n" required />
                     </li>
                     <li>
                         <label for="user-pswd">Password:</label>
-                        <input type="password" name="user-pswd" id="user-pswd" />
+                        <input type="password" name="user-pswd" id="user-pswd" required />
                     </li>
                     <li>
                         <label for="user-e">E&zwj;-&zwj;mail:</label>
-                        <input type="email" name="user-e" id="user-e" />
+                        <input type="email" name="user-e" id="user-e" required />
                     </li>
                 </ol>
             </fieldset>
@@ -48,6 +48,7 @@
     </footer>
     <script src="/js/jquery.js"></script>
     <script src="/js/index.js"></script>
+    <script src="/js/form_validation.js"></script>
     <script>
         (function() {
             const log_in = location.pathname === '/log_in/';
