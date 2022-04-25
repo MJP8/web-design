@@ -45,6 +45,15 @@ app.post('/data/', function(req, res) {
 });
 get('/log_in/', 'src/html/sign_in.html', 'text/html');
 get('/sign_up/', 'src/html/sign_in.html', 'text/html');
+app.post('/user/', function(req, res) {
+    console.log(req.body);
+    fs.readFile('src/html/user.html', function(err, data) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(data);
+        res.end();
+        if (err) throw err;
+    });
+});
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);
 });

@@ -63,6 +63,14 @@ function validateEmail() {
     }
     return valid;
 }
+
+function setCookie(name, value, exDays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
+    let expires = 'expires=' + d.toUTCString();
+    document.cookie = `${name}=${value};${expires};path=/`;
+    console.log('create cookie');
+}
 (function() {
     $('form').on('submit', function(e) {
         e.preventDefault();
@@ -113,6 +121,10 @@ function validateEmail() {
         }
 
         if (isFormValid) {
+            if (location.pathname !== '/new_site/') {
+                setCookie('username', $('#user-n').val(), 7);
+                setCookie('email', $('#user-e').val(), 7);
+            }
             this.submit();
         }
     });
