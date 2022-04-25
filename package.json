@@ -1,0 +1,26 @@
+{
+  "name": "spider-web-design",
+  "version": "0.0.1",
+  "description": "server for my home site",
+  "main": ".server.js",
+  "scripts": {
+    "test": "node ./.server.js",
+    "server": "node ./.server.js",
+    "preserver": "echo 'Starting server with NPM'",
+    "postserver": "echo 'completed server run'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MJP8/web-design.git"
+  },
+  "author": "MJP8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MJP8/web-design/issues"
+  },
+  "homepage": "https://github.com/MJP8/web-design#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3"
+  }
+}
