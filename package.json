@@ -4,7 +4,10 @@
   "description": "server for my home site",
   "main": ".server.js",
   "scripts": {
-    "test": "node ./.server.js"
+    "test": "node ./.server.js",
+    "server": "node ./.server.js",
+    "preserver": "echo 'Starting server with NPM'",
+    "postserver": "echo 'completed server run'"
   },
   "repository": {
     "type": "git",
