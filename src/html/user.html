@@ -16,7 +16,11 @@
         </nav>
     </header>
     <main>
-        <h1></h1>
+        <h1><span></span><button id="edit">Edit</button></h1>
+        <section>
+            <h2>Your sites</h2>
+            <ul></ul>
+        </section>
     </main>
     <footer>
         <ul></ul>
@@ -36,7 +40,8 @@
             return cookies;
         }
         const cookies = parseCookies();
-        $('main h1').text(cookies['username']);
+        $('main h1>span').text(cookies['username']);
+        $('span#email').text(cookies['email']);
     </script>
 </body>
 

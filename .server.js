@@ -54,6 +54,7 @@ app.post('/user/', function(req, res) {
         if (err) throw err;
     });
 });
+get('/user/', 'src/html/user.html', 'text/html');
 app.listen(port, function() {
     console.log(`Server listening at port ${port}`);
 });

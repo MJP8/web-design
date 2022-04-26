@@ -48,6 +48,17 @@ body main h1 {
   padding-left: 1em;
   text-decoration: underline;
 }
+body main #edit {
+  padding: 10px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  background-color: #343028;
+  color: #cbcfd7;
+  border: 0px;
+  font-family: inherit;
+  float: right;
+  margin-right: 10px;
+}
 body footer {
   height: 200px;
   display: flex;
