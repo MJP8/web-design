@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/form.css" />
+    <title>Log in &mdash; Spider Web Design</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul></ul>
+        </nav>
+    </header>
+    <main>
+        <h1></h1>
+        <form action="/user/" method="post" novalidate>
+            <fieldset>
+                <legend>User Info</legend>
+                <hr>
+                <ol>
+                    <li>
+                        <label for="user-n">Username:</label>
+                        <input type="text" name="user-n" id="user-n" required />
+                    </li>
+                    <li>
+                        <label for="user-pswd">Password:</label>
+                        <input type="password" name="user-pswd" id="user-pswd" required />
+                    </li>
+                    <li>
+                        <label for="user-e">E&zwj;-&zwj;mail:</label>
+                        <input type="email" name="user-e" id="user-e" required />
+                    </li>
+                </ol>
+            </fieldset>
+            <hr>
+            <input type="hidden" name="signup" id="signup" />
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <h1>Spider Web Design</h1>
+        <ul></ul>
+    </footer>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/form_validation.js"></script>
+    <script>
+        (function() {
+            const log_in = location.pathname === '/log_in/';
+            $(function() {
+                if (log_in) {
+                    $('#signup').attr('value', 'false');
+                    $('legend, hr').hide();
+                    $('main>h1:first-child').text('Log in');
+                } else {
+                    $('#signup').attr('value', 'true');
+                    $('main>h1:first-child').text('Sign up');
+                }
+            });
+        }());
+    </script>
+</body>
+
+</html>

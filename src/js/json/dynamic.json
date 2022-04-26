@@ -1,12 +1,19 @@
 {
     "message": "Hello example JSON",
-    "nav": [
-        { "name": "Spider Web Design", "href": "/", "class": "logo" },
-        { "name": "Build a Site", "href": "/new_site/", "class": "nav" },
-        { "name": "About us", "href": "/", "class": "nav" },
-        { "name": "Sign in", "href": "/", "class": "nav" },
-        { "name": "Sign up", "href": "/", "class": "nav" }
-    ],
+    "nav": {
+        "newUser": [
+            { "name": "Spider Web Design", "href": "/", "class": "logo" },
+            { "name": "About us", "href": "/", "class": "nav" },
+            { "name": "Log in", "href": "/log_in/", "class": "nav" },
+            { "name": "Sign up", "href": "/sign_up/", "class": "nav" }
+        ],
+        "loggedIn": [
+            { "name": "Spider Web Design", "href": "/", "class": "logo" },
+            { "name": "About us", "href": "/", "class": "nav" },
+            { "name": "Build a site", "href": "/new_site/", "class": "nav" },
+            { "name": "replace", "href": "/user/", "class": "nav" }
+        ]
+    },
     "footer": [
         [
             "Build a Site", [

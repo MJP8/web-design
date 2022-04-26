@@ -43,10 +43,21 @@ body main section,
 body main article {
   padding: 20px;
 }
-body main section h1,
-body main article h1 {
+body main h1 {
   font-size: 2.2em;
   padding-left: 1em;
+  text-decoration: underline;
+}
+body main #edit {
+  padding: 10px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  background-color: #343028;
+  color: #cbcfd7;
+  border: 0px;
+  font-family: inherit;
+  float: right;
+  margin-right: 10px;
 }
 body footer {
   height: 200px;

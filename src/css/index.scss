@@ -54,10 +54,22 @@ body {
         section,
         article {
             padding: 20px;
-            h1 {
-                font-size: 2.2em;
-                padding-left: 1em;
-            }
+        }
+        h1 {
+            font-size: 2.2em;
+            padding-left: 1em;
+            text-decoration: underline;
+        }
+        #edit {
+            padding: 10px;
+            border-radius: 7px;
+            box-sizing: border-box;
+            background-color: $hcolor;
+            color: $color2;
+            border: 0px;
+            font-family: inherit;
+            float: right;
+            margin-right: 10px;
         }
     }
     footer {
