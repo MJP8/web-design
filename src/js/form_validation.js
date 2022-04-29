@@ -64,6 +64,31 @@ function validateEmail() {
     return valid;
 }
 
+function validateUsername(cb) {
+    let el = document.getElementById('user-n');
+    let text = el.value,
+        valid;
+    $.ajax({
+        method: 'POST',
+        url: '/parse/username',
+        data: text,
+        contentType: 'text/plain; charset=UTF-8',
+        dataType: 'text'
+    }).done(function(data) {
+        console.log(data);
+        if (data === 'true') {
+            valid = true;
+        } else {
+            valid = false;
+        }
+        console.log(valid);
+        if (!valid) {
+            setErrorMessage(el, 'Username is already taken');
+        }
+        cb(valid);
+    });
+}
+
 function setCookie(name, value, exDays) {
     const d = new Date();
     d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
@@ -111,15 +136,24 @@ function setCookie(name, value, exDays) {
                     removeErrorMessage(document.getElementById('user-e'));
                 }
             }
-            for (const field in valid) {
-                if (!valid[field]) {
-                    isFormValid = false;
-                    break;
-                }
-                isFormValid = true;
+            if ($('user-n').val() !== '') {
+                validateUsername(isvalid => {
+                    if (!isvalid) {
+                        showErrorMessage(document.getElementById('user-n'));
+                        valid['user-n'] = false;
+                    } else {
+                        removeErrorMessage(document.getElementById('user-n'));
+                    }
+                })
             }
         }
-
+        for (const field in valid) {
+            if (!valid[field]) {
+                isFormValid = false;
+                break;
+            }
+            isFormValid = true;
+        }
         if (isFormValid) {
             if (location.pathname !== '/new_site/') {
                 setCookie('username', $('#user-n').val(), 7);

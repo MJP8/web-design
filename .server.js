@@ -3,8 +3,12 @@ const app = express();
 const port = 4000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const db = require('./.db');
+const md5 = require('md5');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(bodyParser.text());
+db.getConnection('root', 'mjp2022', 3306, 'spider_webdesign');
 
 function get(url, file, contentType) {
     app.get(url, function(req, res) {
@@ -52,6 +56,36 @@ app.post('/user/', function(req, res) {
         res.write(data);
         res.end();
         if (err) throw err;
+    });
+    let username = req.body['user-n'];
+    let password = db.md5(req.body['user-pswd']);
+    let contact = req.body['user-e'];
+    let sign_up = req.body['signup'];
+    if (sign_up === 'true') {
+        db.query(`insert into Users (username, password, contact) values ("${username}", "${password}", "${contact}")`);
+    }
+});
+app.get('/js/json/users.json', function(req, res) {
+    db.query('select * from Users', (result) => {
+        let users = db.parseUsers(result);
+        res.json(users);
+        res.end();
+    });
+});
+app.post('/parse/username', function(req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    let username = req.body;
+    let nameValid;
+    db.query('select * from Users', result => {
+        let records = db.parseUsers(result);
+        let valid = 'true';
+        records.forEach(record => {
+            let $username = record.getName();
+            if (username === $username) valid = 'false';
+        });
+        nameValid = valid;
+        res.write(nameValid);
+        res.end();
     });
 });
 get('/user/', 'src/html/user.html', 'text/html');
