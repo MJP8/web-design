@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const port = 4000;
 const fs = require('fs');
-const bodyParser = require('body-parser');
 const db = require('./.db');
-const md5 = require('md5');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.text());
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.text());
 db.getConnection('root', 'mjp2022', 3306, 'spider_webdesign');
 
 function get(url, file, contentType) {
@@ -65,12 +65,66 @@ app.post('/user/', function(req, res) {
         db.query(`insert into Users (username, password, contact) values ("${username}", "${password}", "${contact}")`);
     }
 });
-app.get('/js/json/users.json', function(req, res) {
-    db.query('select * from Users', (result) => {
-        let users = db.parseUsers(result);
-        res.json(users);
-        res.end();
-    });
+app.post('/js/json/user.json', function(req, res) {
+    let sessionCookie = req.cookies.session;
+    if (sessionCookie) {
+        db.query(`select username, contact from Users where id in (select user_id from session where session_hash = ${sessionCookie}`, (result) => {
+            let data = result[0];
+            let user = {
+                username: data['username'],
+                email: data['contact']
+            }
+            res.json(user);
+            res.end();
+        });
+    } else {
+        db.query('select session_hash from session', data => {
+            let hash = db.md5(Math.random());
+            let hashes = [];
+            for (let i of data) {
+                hashes.push(i.session_hash);
+            }
+            let valid = true;
+            while (true) {
+                for (let i = 0; i < hashes.length; i++) {
+                    let $hash = hashes[i];
+                    if ($hash === hash) {
+                        valid = false;
+                    }
+                }
+                if (valid) {
+                    break;
+                } else {
+                    hash = db.md5(Math.random());
+                }
+            }
+
+            let time = new Date().getTime();
+            let username = req.body['username'];
+            let pswd = req.body['password'];
+            db.query(`select id from Users where username = ${username} and password = ${pswd}`, result => {
+                if (result.length === 1) {
+                    let userID = result[0]['id'];
+                    db.query(`insert into session (user_id, timestamp, session_hash) values 
+                    (${userID}, ${time}, ${hash})`);
+                    db.query('select username, contact from Users where id = ' + userID, newResult => {
+                        let data = newResult[0];
+                        let user = {
+                            username: data['username'],
+                            email: data['contact']
+                        }
+                        res.json(user);
+                        res.cookie('session', hash);
+                        res.end();
+                    });
+                } else {
+                    res.json('wrong username / password');
+                    res.end();
+                    return;
+                }
+            });
+        });
+    }
 });
 app.post('/parse/username', function(req, res) {
     res.writeHead(200, { 'Content-Type': 'text/plain' });

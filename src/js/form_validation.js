@@ -136,15 +136,17 @@ function setCookie(name, value, exDays) {
                     removeErrorMessage(document.getElementById('user-e'));
                 }
             }
-            if ($('user-n').val() !== '') {
-                validateUsername(isvalid => {
-                    if (!isvalid) {
-                        showErrorMessage(document.getElementById('user-n'));
-                        valid['user-n'] = false;
-                    } else {
-                        removeErrorMessage(document.getElementById('user-n'));
-                    }
-                })
+            if (location.pathname === '/sign_up/') {
+                if ($('user-n').val() !== '') {
+                    validateUsername(isvalid => {
+                        if (!isvalid) {
+                            showErrorMessage(document.getElementById('user-n'));
+                            valid['user-n'] = false;
+                        } else {
+                            removeErrorMessage(document.getElementById('user-n'));
+                        }
+                    })
+                }
             }
         }
         for (const field in valid) {
