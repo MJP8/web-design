@@ -67,8 +67,9 @@ app.post('/user/', function(req, res) {
 });
 app.post('/js/json/user.json', function(req, res) {
     let sessionCookie = req.cookies.session;
-    if (sessionCookie) {
-        db.query(`select username, contact from Users where id in (select user_id from session where session_hash = ${sessionCookie}`, (result) => {
+    console.log(sessionCookie);
+    if (sessionCookie !== undefined) {
+        db.query(`select username, contact from Users where id in (select user_id from session where session_hash = "${sessionCookie}")`, (result) => {
             let data = result[0];
             let user = {
                 username: data['username'],
@@ -101,8 +102,10 @@ app.post('/js/json/user.json', function(req, res) {
 
             let time = new Date().getTime();
             let username = req.body['username'];
-            let pswd = req.body['password'];
-            db.query(`select id from Users where username = ${username} and password = ${pswd}`, result => {
+            console.log(username);
+            console.log(req.body['password']);
+            let pswd = db.md5(req.body['password']);
+            db.query(`select id from Users where username = "${username}" and password = "${pswd}"`, result => {
                 if (result.length === 1) {
                     let userID = result[0]['id'];
                     db.query(`insert into session (user_id, timestamp, session_hash) values 
@@ -111,10 +114,10 @@ app.post('/js/json/user.json', function(req, res) {
                         let data = newResult[0];
                         let user = {
                             username: data['username'],
-                            email: data['contact']
+                            email: data['contact'],
                         }
-                        res.json(user);
                         res.cookie('session', hash);
+                        res.json(user);
                         res.end();
                     });
                 } else {

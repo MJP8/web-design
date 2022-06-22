@@ -2,7 +2,6 @@ function parseCookie() {
     const cookies = {};
     const raw = document.cookie;
     let split = raw.split(';');
-    console.log(split);
     for (const i of split) {
         let cookie = i.split('=');
         cookies[cookie[0].trim()] = cookie[1].trim();

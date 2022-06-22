@@ -91,9 +91,13 @@ function validateUsername(cb) {
 
 function setCookie(name, value, exDays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
-    let expires = 'expires=' + d.toUTCString();
-    document.cookie = `${name}=${value};${expires};path=/`;
+    if (exDays) {
+        d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
+        let expires = 'expires=' + d.toUTCString();
+        document.cookie = `${name}=${value};${expires};path=/`;
+    } else {
+        document.cookie = `${name}=${value};`;
+    }
     console.log('create cookie');
 }
 (function() {
@@ -158,10 +162,14 @@ function setCookie(name, value, exDays) {
         }
         if (isFormValid) {
             if (location.pathname !== '/new_site/') {
-                setCookie('username', $('#user-n').val(), 7);
-                setCookie('email', $('#user-e').val(), 7);
+                $.post('/js/json/user.json', {
+                    'username': $('user-n').val(),
+                    'password': $('user-pswd').val()
+                }).done(data => {
+                    console.log(data);
+                });
             }
-            this.submit();
+            // this.submit();
         }
     });
 }());
