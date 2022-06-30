@@ -1,13 +1,25 @@
 function parseCookie() {
     const cookies = {};
     const raw = document.cookie;
-    let split = raw.split(';');
-    for (const i of split) {
-        let cookie = i.split('=');
-        cookies[cookie[0].trim()] = cookie[1].trim();
+    if (raw) {
+        let split = raw.split(';');
+        for (const i of split) {
+            let cookie = i.split('=');
+            cookies[cookie[0].trim()] = cookie[1].trim();
+        }
     }
     return cookies;
 }
+let username;
+let email;
+if (parseCookie()['session']) {
+    $.post('/js/json/user.json')
+        .done((data) => {
+            username = data.username;
+            email = data.email;
+        });
+}
+
 
 function analyze(jsonText) {
     // parse JSON
@@ -15,12 +27,12 @@ function analyze(jsonText) {
     // when the document is ready,
     $(function() {
         // iterate through the data
-        if (parseCookie()['username']) {
+        if (parseCookie()['session']) {
             for (const item of json.nav.loggedIn) {
                 // append data to page with JQuery
                 let name = item.name;
-                if (name === 'replace') {
-                    name = parseCookie()['username'];
+                if (name == 'replace') {
+                    name = username;
                 }
                 $('header ul').append(`<li class="${item.class}">
                 <a href="${item.href}">${name}</a></li>`);

@@ -67,7 +67,7 @@ app.post('/user/', function(req, res) {
 });
 app.post('/js/json/user.json', function(req, res) {
     let sessionCookie = req.cookies.session;
-    console.log(sessionCookie);
+    console.log("sessionCookie: ", sessionCookie);
     if (sessionCookie !== undefined) {
         db.query(`select username, contact from Users where id in (select user_id from session where session_hash = "${sessionCookie}")`, (result) => {
             let data = result[0];
@@ -100,16 +100,18 @@ app.post('/js/json/user.json', function(req, res) {
                 }
             }
 
-            let time = new Date().getTime();
+            let time = new Date().getTime() / 1000;
             let username = req.body['username'];
-            console.log(username);
-            console.log(req.body['password']);
+            console.log("username:", username);
+            console.log("password:", req.body['password']);
             let pswd = db.md5(req.body['password']);
+            console.log("encrypted password:", pswd);
+            console.log("hash:", hash);
             db.query(`select id from Users where username = "${username}" and password = "${pswd}"`, result => {
                 if (result.length === 1) {
                     let userID = result[0]['id'];
                     db.query(`insert into session (user_id, timestamp, session_hash) values 
-                    (${userID}, ${time}, ${hash})`);
+                    ('${userID}', '${time}', '${hash}')`);
                     db.query('select username, contact from Users where id = ' + userID, newResult => {
                         let data = newResult[0];
                         let user = {

@@ -116,43 +116,43 @@ function setCookie(name, value, exDays) {
             }
             valid[elements[i].id] = isValid;
         }
-        if (location.pathname === '/new_site/') {
-            if ($('#meta-k').val() !== '') {
-                if (!validateKeywords()) {
-                    showErrorMessage(document.getElementById('meta-k'));
-                    valid['meta-k'] = false;
-                } else {
-                    removeErrorMessage(document.getElementById('meta-k'));
-                }
-            }
-            if (!validateLayout()) {
-                showErrorMessage(document.getElementById('layout-o'));
-                valid['layout-o'] = false;
+        // if (location.pathname === '/new_site/') {
+        //     if ($('#meta-k').val() !== '') {
+        //         if (!validateKeywords()) {
+        //             showErrorMessage(document.getElementById('meta-k'));
+        //             valid['meta-k'] = false;
+        //         } else {
+        //             removeErrorMessage(document.getElementById('meta-k'));
+        //         }
+        //     }
+        //     if (!validateLayout()) {
+        //         showErrorMessage(document.getElementById('layout-o'));
+        //         valid['layout-o'] = false;
+        //     } else {
+        //         removeErrorMessage(document.getElementById('layout-o'));
+        //     }
+        // } else {
+        if ($('user-e').val() !== '') {
+            if (!validateEmail()) {
+                showErrorMessage(document.getElementById('user-e'));
+                valid['user-e'] = false;
             } else {
-                removeErrorMessage(document.getElementById('layout-o'));
-            }
-        } else {
-            if ($('user-e').val() !== '') {
-                if (!validateEmail()) {
-                    showErrorMessage(document.getElementById('user-e'));
-                    valid['user-e'] = false;
-                } else {
-                    removeErrorMessage(document.getElementById('user-e'));
-                }
-            }
-            if (location.pathname === '/sign_up/') {
-                if ($('user-n').val() !== '') {
-                    validateUsername(isvalid => {
-                        if (!isvalid) {
-                            showErrorMessage(document.getElementById('user-n'));
-                            valid['user-n'] = false;
-                        } else {
-                            removeErrorMessage(document.getElementById('user-n'));
-                        }
-                    })
-                }
+                removeErrorMessage(document.getElementById('user-e'));
             }
         }
+        if (location.pathname === '/sign_up/') {
+            if ($('user-n').val() !== '') {
+                validateUsername(isvalid => {
+                    if (!isvalid) {
+                        showErrorMessage(document.getElementById('user-n'));
+                        valid['user-n'] = false;
+                    } else {
+                        removeErrorMessage(document.getElementById('user-n'));
+                    }
+                })
+            }
+        }
+        // }
         for (const field in valid) {
             if (!valid[field]) {
                 isFormValid = false;
@@ -161,15 +161,17 @@ function setCookie(name, value, exDays) {
             isFormValid = true;
         }
         if (isFormValid) {
-            if (location.pathname !== '/new_site/') {
-                $.post('/js/json/user.json', {
-                    'username': $('user-n').val(),
-                    'password': $('user-pswd').val()
-                }).done(data => {
-                    console.log(data);
-                });
-            }
-            // this.submit();
+            // if (location.pathname !== '/new_site/') {
+            console.log("username:", $('#user-n').val());
+            console.log("password:", $('#user-pswd').val());
+            $.post('/js/json/user.json', {
+                'username': $('#user-n').val(),
+                'password': $('#user-pswd').val()
+            }).done(data => {
+                console.log(data);
+            });
+            // }
+            this.submit();
         }
     });
 }());
