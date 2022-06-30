@@ -54,6 +54,20 @@ function analyze(jsonText) {
     });
     return json;
 }
+if (parseCookie()['session']) {
+    switch (location.pathname) {
+        case '/log_in/':
+        case '/sign_up/':
+            location.assign('/');
+    }
+} else {
+    switch (location.pathname) {
+        case '/user/':
+        case '/new_site/':
+        case '/new_site/finished/':
+            location.assign('/sign_up/');
+    }
+}
 const xhttp = new XMLHttpRequest();
 let response;
 xhttp.onload = function() {

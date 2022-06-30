@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/form.css" />
     <title>Log in &mdash; Spider Web Design</title>
+    <style>
+        small b {
+            margin-left: 10px;
+        }
+        
+        small b a {
+            color: inherit;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,6 +50,7 @@
             <input type="hidden" name="signup" id="signup" />
             <button type="submit">Submit</button>
         </form>
+        <small><b></b></small>
     </main>
     <footer>
         <h1>Spider Web Design</h1>
@@ -57,9 +67,11 @@
                     $('#signup').attr('value', 'false');
                     $('legend, hr').hide();
                     $('main>h1:first-child').text('Log in');
+                    $('small b').html('Don\'t  have an account? <a href="/sign_up/">Sign up.</a>');
                 } else {
                     $('#signup').attr('value', 'true');
                     $('main>h1:first-child').text('Sign up');
+                    $('small b').html('Already have an account? <a href="/log_in/">Log in.</a>');
                 }
             });
         }());
