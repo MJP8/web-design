@@ -7,41 +7,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User &mdash; Spider Web Design</title>
     <link rel="stylesheet" href="/css/index.css">
+    <style>
+        main header {
+            background-color: inherit;
+        }
+        
+        section {
+            padding-top: 100px!important;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        
+        #email {
+            font-size: small;
+            padding-left: 30px;
+        }
+        
+        #modal {
+            display: none;
+            background-color: #343028;
+            z-index: 100;
+            padding: 10px;
+            margin: 100px;
+            width: 50%;
+            height: 55%;
+            position: fixed;
+            left: 25%;
+            top: -3%;
+            border-radius: 10px;
+        }
+        
+        #modal * {
+            display: block;
+            margin: 10px;
+        }
+        
+        #modal input {
+            background-color: #282c34!important;
+            padding: 10px;
+            border-radius: 7px;
+            box-sizing: border-box;
+            color: #cbcfd7;
+            border: 0px;
+            font-family: inherit;
+        }
+        
+        #modal button {
+            background-color: #282c34!important;
+            padding: 10px;
+            border-radius: 7px;
+            box-sizing: border-box;
+            color: #cbcfd7;
+            border: 0px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        
+        #modal #close {
+            position: absolute;
+            left: 95%;
+            top: 0%;
+            font-size: larger;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
+    <header class="background">
         <nav>
             <ul></ul>
         </nav>
     </header>
-    <main>
-        <h1><span></span><button id="edit">Edit</button></h1>
+    <div id="modal">
+        <span id="close">&times;</span>
+        <h2>Edit profile</h2>
+        <label for="edit-e">Email:</label>
+        <input type="email" id="edit-e" />
+        <button>Change E-mail</button>
+        <label for="current-p">Old password:</label>
+        <input type="password" id="current-p">
+        <label for="edit-p">New password:</label>
+        <input type="password" id="edit-p" style="background-color: #282c34!important;" />
+        <button>Change Password</button>
+    </div>
+    <main class="background">
+        <header>
+            <h1><span></span><button id="edit">Edit</button></h1>
+            <span id="email"></span>
+        </header>
         <section>
             <h2>Your sites</h2>
-            <ul></ul>
+            <p>You have no websites.</p>
         </section>
     </main>
-    <footer>
+    <footer class="background">
         <ul></ul>
     </footer>
     <script src="/js/jquery.js"></script>
     <script src="/js/index.js"></script>
     <script>
-        function parseCookies() {
-            const cookies = {};
-            const raw = document.cookie;
-            let split = raw.split(';');
-            console.log(split);
-            for (const i of split) {
-                let cookie = i.split('=');
-                cookies[cookie[0].trim()] = cookie[1].trim();
-            }
-            return cookies;
+        // function parseCookies() {
+        //     const cookies = {};
+        //     const raw = document.cookie;
+        //     let split = raw.split(';');
+        //     console.log(split);
+        //     for (const i of split) {
+        //         let cookie = i.split('=');
+        //         cookies[cookie[0].trim()] = cookie[1].trim();
+        //     }
+        //     return cookies;
+        // }
+        function showModal() {
+            $('.background').css('opacity', 0.3);
+            $('#modal').show();
         }
-        const cookies = parseCookies();
-        $('main h1>span').text(cookies['username']);
-        $('span#email').text(cookies['email']);
+
+        function hideModal() {
+            $('.background').css('opacity', 1);
+            $('#modal').hide();
+        }
+        $.post('/js/json/user.json')
+            .done((data) => {
+                let username = data.username;
+                let email = data.email;
+                $(function() {
+                    $('h1 span').text(username);
+                    $('#email').text(email);
+                    $('#edit').click((e) => {
+                        showModal();
+                    });
+                    $('#close').click((e) => {
+                        hideModal();
+                    });
+                });
+            });
     </script>
 </body>
 
